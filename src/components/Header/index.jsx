@@ -1,0 +1,33 @@
+import React, { useEffect, useState } from 'react';
+import { Inners } from '../Styles/Common';
+import { Headers } from './Style';
+import img_cc_logotype from '../../assets/images/img_cc_logotype.svg';
+import img_cc_logotype_brand from '../../assets/images/img_cc_logotype_brand.svg';
+
+function Header () {
+    const [scrollY, setScrollY] = useState(0);
+
+    const handleNavigation = (e) => {
+        const window = e.currentTarget;
+        setScrollY(window.pageYOffset);
+    };
+
+    useEffect(() => {
+        setScrollY(window.pageYOffset);
+        window.addEventListener('scroll', (e) => handleNavigation(e));
+    }, []);
+
+    return (
+        <Headers className={scrollY > 0 ? 'on' : ''}>
+            <Inners>
+                <div className='header-logo'>
+                    <a href="https://www.coffeechat.kr/" rel="noreferrer" target="_blank">
+                        <img src={scrollY > 0 ? img_cc_logotype_brand : img_cc_logotype} alt="커피챗 로고" />
+                    </a>
+                </div>
+            </Inners>
+        </Headers>
+    );
+}
+
+export default Header;
